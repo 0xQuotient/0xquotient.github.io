@@ -257,25 +257,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .sub h3 { margin: 0; font: 700 1.5rem/1.1 var(--f-display); }
 .sub p { margin: 0; color: var(--muted); font-size: .9375rem; }
 .flow { padding: 32px 30px 0; overflow: hidden; }
-.tierh { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; margin-bottom: 14px; }
-.tierh span:last-child { color: var(--muted); font-size: .9375rem; }
-.span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; min-height: 44px; margin: 0; padding: 10px 16px; border-radius: 10px; background: var(--card-2); border: 1px solid var(--line-2); }
-.span b { font: 700 .9375rem var(--f-display); }
-.span span { color: var(--muted); font-size: .875rem; }
-.span.all { background: color-mix(in oklab, var(--cyan) 9%, var(--card-2)); border-color: color-mix(in oklab, var(--cyan) 32%, transparent); }
-.tier { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; position: relative; }
-.span.all + .tier { margin-top: 26px; }
-.span.all + .tier::before { content: ""; position: absolute; top: -26px; left: 12.5%; right: 12.5%; height: 26px; border: 1px solid var(--line-3); border-bottom: 0; border-radius: 10px 10px 0 0; }
-.tier li { position: relative; padding: 16px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
-.tier b { display: block; font: 700 .9375rem/1.25 var(--f-display); }
-.tier span { display: block; margin-top: 4px; color: var(--muted); font-size: .8125rem; line-height: 1.35; }
-.down { display: block; width: 1px; height: 30px; margin: 18px auto; background: var(--line-3); }
-.hub { padding: 20px 22px; border-radius: 12px; background: color-mix(in oklab, var(--cyan) 8%, var(--card-2)); border: 1px solid color-mix(in oklab, var(--cyan) 30%, transparent); }
-.hub h4 { margin: 6px 0 0; font: 700 1.1875rem/1.2 var(--f-display); }
-.hub p { margin: 8px 0 0; max-width: 62ch; color: var(--soft); font-size: .9375rem; line-height: 1.55; }
-.aux { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 18px 0 0; color: var(--muted); font-size: .875rem; }
-.case { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 24px; margin: 30px -30px 0; padding: 24px 30px 28px; border-top: 1px solid var(--line); background: rgba(255, 255, 255, .015); }
-.case-h { grid-column: 1 / 4; padding-right: 24px; }
+.tier { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; position: relative; }
+.tier li { position: relative; padding: 20px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
+.tier b { display: block; font: 700 1.0625rem/1.25 var(--f-display); }
+.tier span { display: block; margin-top: 6px; color: var(--soft); font-size: .9375rem; line-height: 1.5; }
+.case { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; margin: 28px -30px 0; padding: 24px 30px 28px; border-top: 1px solid var(--line); background: rgba(255, 255, 255, .015); }
+.case-h { padding-right: 24px; }
 .case-h h4 { margin: 6px 0 0; font: 700 1.1875rem/1.2 var(--f-display); }
 .case-h p { margin: 8px 0 0; max-width: 40ch; color: var(--muted); font-size: .9375rem; }
 .case-s { min-width: 0; }
@@ -392,9 +379,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .links { grid-template-columns: minmax(0, 1fr); }
   .path { --amp: .45; }
   .flow { padding: 26px 22px 0; }
-  .tier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .span.all + .tier::before { left: 25%; right: 25%; }
-                .case { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-inline: -22px; padding-inline: 22px; }
+                  .case { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-inline: -22px; padding-inline: 22px; }
   .case-h { grid-column: 1; }
 }
 @media (max-width: 560px) {
@@ -411,8 +396,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .wish .mono { margin-left: 0; }
   .lk { padding: 14px 16px; }
   .tier { grid-template-columns: minmax(0, 1fr); }
-  .span.all + .tier::before { left: 50%; right: auto; width: 1px; border-radius: 0; border-right: 0; }
-}
+  }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
@@ -753,40 +737,22 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 
       <div class="sub" id="workflow">
         <h3>Workflow</h3>
-        <p>Claude runs the models, Notion holds the work, then it goes public.</p>
+        <p>How a project goes from question to published.</p>
       </div>
       <div class="card flow rv">
-        <div class="tierh"><span class="mono">01 · Models</span><span>Claude runs the process and picks the tool for each job.</span></div>
-        <p class="span all"><b>Claude</b><span>Orchestrator</span></p>
         <ul class="tier">
-          <li><b>Perplexity &amp; Gemini</b><span>Facts and web search</span></li>
-          <li><b>Grok</b><span>Objective reasoning</span></li>
-          <li><b>ChatGPT</b><span>Scripting and organizing</span></li>
-          <li><b>Muse AI</b><span>Automation</span></li>
+          <li><b>Research</b><span>I work through the question with AI tools until the facts hold up.</span></li>
+          <li><b>Notion</b><span>One doc per project: the plan, the notes I take while working, and the write-up.</span></li>
+          <li><b>Publish</b><span>The finished piece goes out to Paragraph or GitHub.</span></li>
         </ul>
-        <span class="down" aria-hidden="true"></span>
-        <div class="hub">
-          <span class="mono">02 · Private</span>
-          <h4>Notion, my command center</h4>
-          <p>Everything lands here. Notes, synthesis, and aggregation, then drafting and building in the same doc.</p>
-        </div>
-        <span class="down" aria-hidden="true"></span>
-        <div class="tierh"><span class="mono">03 · Public</span><span>Linktree points to all of it.</span></div>
-        <ul class="tier">
-          <li><b>This site</b><span>My public HQ</span></li>
-          <li><b>Paragraph</b><span>Long-form writing</span></li>
-          <li><b>GitHub</b><span>Code and open source</span></li>
-          <li><b>Instagram</b><span>Short-form</span></li>
-        </ul>
-        <p class="aux"><span class="mono">Also</span>Reddit for research, Telegram for bot automation, Meta Business Suite for analytics.</p>
         <div class="case">
           <div class="case-h">
             <span class="mono">Example</span>
             <h4>DVWA lab</h4>
             <p>A web app built to be insecure on purpose, for practicing attacks.</p>
           </div>
-          <div class="case-s"><span class="mono">Private</span><p>Took notes in Notion as I ran it on my Ubuntu VM and attacked it from Kali.</p></div>
-          <div class="case-s"><span class="mono">Public</span><p>Wrote the report from those notes and published it on Paragraph.</p></div>
+          <div class="case-s"><span class="mono">In the doc</span><p>Took notes as I ran it on my Ubuntu VM and attacked it from Kali.</p></div>
+          <div class="case-s"><span class="mono">Published</span><p>Wrote the report from those notes and put it on Paragraph.</p></div>
         </div>
       </div>
     </section>
