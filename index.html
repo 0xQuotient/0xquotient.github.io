@@ -158,6 +158,11 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .p-lead { max-width: 28ch; margin: 14px 0 0; font-size: clamp(1.0625rem, 1.8vw, 1.25rem); line-height: 1.45; color: var(--soft); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .chip { padding: 5px 11px; border-radius: 8px; font-size: .875rem; font-weight: 500; color: var(--soft); background: rgba(255, 255, 255, .035); border: 1px solid var(--line); }
+.proofs { margin-top: 24px; border-top: 1px solid var(--line); }
+.proof { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 12px 2px; border-bottom: 1px solid var(--line); }
+.proof b { font-weight: 600; }
+.proof small { display: block; margin-top: 2px; color: var(--muted); font-size: .875rem; }
+.proof .ic { color: var(--muted); transition: color .15s ease, transform .2s var(--ease); }
 .also { margin-top: 26px; }
 .also-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 14px; }
 .also-h span:last-child { font-size: .875rem; color: var(--muted); }
@@ -349,6 +354,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
     .nb:hover:not(:disabled) { color: var(--fg); background: var(--card-2); border-color: var(--line-3); }
   .pub:hover { border-color: var(--line-3); }
   .pub:hover .read .ic { transform: translate(2px, -2px); }
+  a.proof:hover .ic { color: var(--c); transform: translateX(2px); }
   a.lk:hover { background: var(--card-2); }
   .nb:hover:not(:disabled) { transform: translateY(-1px); }
   .nb:active:not(:disabled) { transform: scale(.94); }
@@ -497,7 +503,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
         </div>
         <div>
           <span class="mono">Topics</span>
-          <div class="chips"><span class="chip">Perception</span><span class="chip">Cognition</span><span class="chip">Consciousness</span><span class="chip">Sense of self</span><span class="chip">Decision-making</span><span class="chip">Persuasion</span></div>        </div>
+          <div class="chips"><span class="chip">Perception</span><span class="chip">Cognition</span><span class="chip">Consciousness</span><span class="chip">Sense of self</span><span class="chip">Decision-making</span><span class="chip">Persuasion</span></div>
+          <div class="proofs">
+            <div class="proof"><span><b>Psychology B.S.</b><small>UMass Boston</small></span></div>
+            <a class="proof" href="https://paragraph.com/@derrickjr/the-human-node" target="_blank" rel="noopener"><span><b>The Human Node</b><small>My piece on psychological exploitation</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></a>
+          </div>
+        </div>
         <svg class="wm" aria-hidden="true"><use href="#i-eye"/></svg>
       </div>
 
@@ -508,7 +519,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
         </div>
         <div>
           <span class="mono">Topics</span>
-          <div class="chips"><span class="chip">Social engineering</span><span class="chip">Networks</span><span class="chip">Web security</span><span class="chip">Linux</span><span class="chip">Virtualization</span><span class="chip">HackTheBox</span></div>        </div>
+          <div class="chips"><span class="chip">Social engineering</span><span class="chip">Networks</span><span class="chip">Web security</span><span class="chip">Linux</span><span class="chip">Virtualization</span><span class="chip">HackTheBox</span></div>
+          <div class="proofs">
+            <a class="proof" href="#builds"><span><b>Projects</b><small>Hellhound and The Phish Store</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-right"/></svg></a>
+            <a class="proof" href="#lab"><span><b>Lab</b><small>Laptops, VMs, and phones</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-right"/></svg></a>
+          </div>
+        </div>
         <svg class="wm" aria-hidden="true"><use href="#i-term"/></svg>
       </div>
 
@@ -519,7 +535,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
         </div>
         <div>
           <span class="mono">Topics</span>
-          <div class="chips"><span class="chip">Crypto &amp; DeFi</span><span class="chip">AI and markets</span><span class="chip">Index investing</span><span class="chip">Macro</span></div>        </div>
+          <div class="chips"><span class="chip">Crypto &amp; DeFi</span><span class="chip">AI and markets</span><span class="chip">Index investing</span><span class="chip">Macro</span></div>
+          <div class="proofs">
+            <a class="proof" href="https://x.com/ivediedb4" target="_blank" rel="noopener"><span><b>X</b><small>Day to day on crypto and tech</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></a>
+            <a class="proof" href="https://www.blossomsocial.com/users/Derrick__QuVWu1oXOYHDENzk" target="_blank" rel="noopener"><span><b>Blossom</b><small>Macro and the long game</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></a>
+          </div>
+        </div>
         <svg class="wm" aria-hidden="true"><use href="#i-chart"/></svg>
       </div>
 
@@ -530,7 +551,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
         </div>
         <div>
           <span class="mono">Topics</span>
-          <div class="chips"><span class="chip">Producing</span><span class="chip">Engineering</span><span class="chip">Vocals</span><span class="chip">Songwriting</span><span class="chip">FL Studio</span></div>        </div>
+          <div class="chips"><span class="chip">Producing</span><span class="chip">Engineering</span><span class="chip">Vocals</span><span class="chip">Songwriting</span><span class="chip">FL Studio</span></div>
+          <div class="proofs">
+            <a class="proof" href="https://soundcloud.com/just-games-359581971" target="_blank" rel="noopener"><span><b>SoundCloud</b><small>What I’ve released</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></a>
+            <div class="proof"><span><b>FL Studio</b><small>Where I produce, engineer, and write</small></span></div>
+          </div>
+        </div>
         <svg class="wm" aria-hidden="true"><use href="#i-wave"/></svg>
       </div>
 
