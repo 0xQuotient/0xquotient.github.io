@@ -1,5 +1,7 @@
 # derrick.last — personal site
 
+Live at **https://0xquotient.github.io**
+
 My personal site: one hand-written `index.html` with the CSS and JS inline, plus images.
 No build step, no dependencies, no tracking. Hosted on GitHub Pages.
 
