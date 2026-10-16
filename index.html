@@ -273,6 +273,13 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .sub p { margin: 0; color: var(--muted); font-size: .9375rem; }
 .flow { padding: 32px 30px 0; overflow: hidden; }
 .tier { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; position: relative; }
+.kit { margin: 20px 0 0; padding: 20px 22px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
+.kit > div { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 12px 0; }
+.kit > div + div { border-top: 1px solid var(--line); }
+.kit > div:first-child { padding-top: 0; }
+.kit > div:last-child { padding-bottom: 0; }
+.kit dt { padding-top: 5px; }
+.kit dd { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; }
 .tier li { position: relative; padding: 20px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
 .tier b { display: block; font: 700 1.0625rem/1.25 var(--f-display); }
 .tier span { display: block; margin-top: 6px; color: var(--soft); font-size: .9375rem; line-height: 1.5; }
@@ -406,6 +413,8 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .idf > div { padding: 6px 8px 4px; }
   .idf dd { font-size: .9375rem; }
   .tier { grid-template-columns: minmax(0, 1fr); }
+  .kit > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .kit dt { padding-top: 0; }
   }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -771,10 +780,20 @@ exec: /usr/local/bin/portfolio --public</pre>
       </div>
       <div class="card flow rv">
         <ul class="tier">
-          <li><b>Research</b><span>I work through the question with AI tools until the facts hold up.</span></li>
-          <li><b>Notion</b><span>One doc per project: the plan, the notes I take while working, and the write-up.</span></li>
-          <li><b>Publish</b><span>The finished piece goes out to Paragraph or GitHub.</span></li>
+          <li><b>Research</b><span>I work the question through with AI tools until the facts hold up.</span></li>
+          <li><b>Develop</b><span>One doc per project holds the plan, the notes I take while working, and the draft.</span></li>
+          <li><b>Publish</b><span>The finished piece goes out as a write-up or a repo.</span></li>
         </ul>
+        <dl class="kit">
+          <div>
+            <dt class="mono">Models</dt>
+            <dd><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">Perplexity</span><span class="chip">Muse AI</span></dd>
+          </div>
+          <div>
+            <dt class="mono">Apps</dt>
+            <dd><span class="chip">Notion</span><span class="chip">GitHub</span><span class="chip">Telegram</span><span class="chip">Reddit</span><span class="chip">Meta Business Suite</span></dd>
+          </div>
+        </dl>
       </div>
     </section>
 
