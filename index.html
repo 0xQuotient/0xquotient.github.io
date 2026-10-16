@@ -271,18 +271,17 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .sub { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; margin: 44px 0 18px; padding-top: 34px; border-top: 1px solid var(--line); }
 .sub h3 { margin: 0; font: 700 1.5rem/1.1 var(--f-display); }
 .sub p { margin: 0; color: var(--muted); font-size: .9375rem; }
-.flow { padding: 32px 30px 0; overflow: hidden; }
-.tier { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; position: relative; }
-.kit { margin: 20px 0 0; padding: 20px 22px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
-.kit > div { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 12px 0; }
-.kit > div + div { border-top: 1px solid var(--line); }
-.kit > div:first-child { padding-top: 0; }
-.kit > div:last-child { padding-bottom: 0; }
-.kit dt { padding-top: 5px; }
-.kit dd { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; }
-.tier li { position: relative; padding: 20px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
-.tier b { display: block; font: 700 1.0625rem/1.25 var(--f-display); }
-.tier span { display: block; margin-top: 6px; color: var(--soft); font-size: .9375rem; line-height: 1.5; }
+.flow { padding: 30px; }
+.stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 14px; margin: 0; padding: 0; list-style: none; }
+.stage { display: grid; grid-row: span 3; grid-template-rows: subgrid; padding: 22px 20px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); }
+.stage > header b { display: block; font: 700 1.0625rem/1.25 var(--f-display); }
+.stage > header p { margin: 6px 0 0; color: var(--soft); font-size: .9375rem; line-height: 1.5; }
+.grp { align-self: start; padding-top: 14px; border-top: 1px solid var(--line); }
+.grp h4 { margin: 0 0 8px; font-weight: 500; }
+.grp ul { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.grp li { display: grid; gap: 1px; font-size: .9375rem; line-height: 1.4; }
+.grp li b { font-weight: 600; }
+.grp li span { color: var(--muted); font-size: .875rem; }
 
 /* path */
 .pathwrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 16px; align-items: start; }
@@ -395,7 +394,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .pub { flex-basis: 84%; }
   .links { grid-template-columns: minmax(0, 1fr); }
   .path { --amp: .45; }
-  .flow { padding: 26px 22px 0; }
+  .flow { padding: 20px; }
                     }
 @media (max-width: 560px) {
   .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -412,9 +411,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .lk { padding: 14px 16px; }
   .idf > div { padding: 6px 8px 4px; }
   .idf dd { font-size: .9375rem; }
-  .tier { grid-template-columns: minmax(0, 1fr); }
-  .kit > div { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .kit dt { padding-top: 0; }
+  .stages { grid-template-columns: minmax(0, 1fr); }
   }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -779,21 +776,23 @@ exec: /usr/local/bin/portfolio --public</pre>
         <p>How a project goes from question to published.</p>
       </div>
       <div class="card flow rv">
-        <ul class="tier">
-          <li><b>Research</b><span>I work the question through with AI tools until the facts hold up.</span></li>
-          <li><b>Develop</b><span>One doc per project holds the plan, the notes I take while working, and the draft.</span></li>
-          <li><b>Publish</b><span>The finished piece goes out as a write-up or a repo.</span></li>
+        <ul class="stages">
+          <li class="stage">
+            <header><b>Research</b><p>I work the question through until the facts hold up.</p></header>
+            <div class="grp"><h4 class="mono">Models</h4><ul><li><b>Gemini</b><span>Broad search</span></li><li><b>Perplexity</b><span>Deeper, niche research</span></li><li><b>Grok</b><span>Reasoning check</span></li></ul></div>
+            <div class="grp"><h4 class="mono">Apps</h4><ul><li><b>Reddit</b><span>Firsthand threads and community knowledge</span></li></ul></div>
+          </li>
+          <li class="stage">
+            <header><b>Develop</b><p>One doc per project holds the plan, my notes, and the draft.</p></header>
+            <div class="grp"><h4 class="mono">Models</h4><ul><li><b>Claude</b><span>Plans the work and drafts</span></li><li><b>ChatGPT</b><span>Scripts and structure</span></li></ul></div>
+            <div class="grp"><h4 class="mono">Apps</h4><ul><li><b>Notion</b><span>The project doc</span></li><li><b>Telegram</b><span>Encrypted chat and bot automation</span></li></ul></div>
+          </li>
+          <li class="stage">
+            <header><b>Publish</b><p>The finished piece goes out as a write-up or a repo.</p></header>
+            <div class="grp"><h4 class="mono">Models</h4><ul><li><b>Muse AI</b><span>Automation</span></li></ul></div>
+            <div class="grp"><h4 class="mono">Apps</h4><ul><li><b>Paragraph</b><span>Write-ups</span></li><li><b>GitHub</b><span>Code and repos</span></li><li><b>Meta Business Suite</b><span>Post analytics</span></li></ul></div>
+          </li>
         </ul>
-        <dl class="kit">
-          <div>
-            <dt class="mono">Models</dt>
-            <dd><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">Perplexity</span><span class="chip">Muse AI</span></dd>
-          </div>
-          <div>
-            <dt class="mono">Apps</dt>
-            <dd><span class="chip">Notion</span><span class="chip">GitHub</span><span class="chip">Telegram</span><span class="chip">Reddit</span><span class="chip">Meta Business Suite</span></dd>
-          </div>
-        </dl>
       </div>
     </section>
 
