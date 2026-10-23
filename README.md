@@ -1,6 +1,6 @@
 # Derrick J. Last Jr
 
-Personal site: projects, writing, my lab, and how I work.
+Personal site: what I built, what I write, my setup, and how I work.
 
 **Live:** https://0xquotient.github.io
 
