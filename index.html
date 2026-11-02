@@ -132,12 +132,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .board > *, .card > * { position: relative; z-index: 1; }
 .glyph { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 10px; background: var(--card-2); border: 1px solid var(--line-2); color: var(--soft); }
 
-/* hero */
-.tty { position: absolute; inset: 0; z-index: 0; margin: 0; padding: 20px 24px; overflow: hidden;
-  font: 400 11px/1.5 var(--f-mono); color: var(--cyan); opacity: .085; white-space: pre; letter-spacing: .02em;
-  pointer-events: none; user-select: none;
-  -webkit-mask: linear-gradient(105deg, #000 10%, transparent 62%); mask: linear-gradient(105deg, #000 10%, transparent 62%); }
-.hero > .stars, .hero > .stars::after { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* hero */.hero > .stars, .hero > .stars::after { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero > .stars { background-image:
     radial-gradient(1px 1px at 50% 56%, rgba(228, 236, 248, 0.8), transparent),
     radial-gradient(1.5px 1.5px at 55% 58%, rgba(228, 236, 248, 0.5), transparent),
@@ -322,9 +317,6 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .duo.gap { margin-top: 16px; }
 .pc { flex-wrap: wrap; padding: 16px 18px; }
 .pc .tag { margin-left: auto; }
-.wish { margin-top: 16px; padding: 16px 18px; background: transparent; border: 1px dashed var(--line-3); box-shadow: none; }
-.wish div span { display: block; color: var(--muted); font-size: .9375rem; }
-.wish .mono { margin-left: auto; white-space: nowrap; }
 
 /* workflow */
 .sub { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; margin: 44px 0 18px; padding-top: 34px; border-top: 1px solid var(--line); }
@@ -389,8 +381,6 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .addr { padding: 13px 14px; border-radius: 10px; background: var(--well); border: 1px solid var(--line-2); font: 400 clamp(.78rem, 3.3vw, .9375rem) var(--f-mono); user-select: all; overflow-wrap: anywhere; }
 .mail .row { flex-wrap: wrap; }
 .toast { min-height: 1.4em; margin: 0; font: 400 .8125rem var(--f-mono); color: var(--cyan); }
-.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-bottom: 40px; padding: 16px 22px; border-radius: 11px; background: var(--board); border: 1px solid var(--line); font: 400 .75rem var(--f-mono); color: var(--muted); }
-.foot span:first-child { color: var(--soft); }
 
 /* life: quiet scroll reveal, cursor spotlight, small pops. Transform and opacity only. */
 .spot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s ease;
@@ -440,9 +430,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 }
 @media (max-width: 860px) {
   .hero, .bh, .panel, .duo, .duo.feat, .hi { grid-template-columns: minmax(0, 1fr); }
-  .idcard { width: min(100%, 340px); }
-  .tty { opacity: .028; -webkit-mask: linear-gradient(#000 4%, transparent 26%); mask: linear-gradient(#000 4%, transparent 26%); }
-  .rabbit { grid-template-columns: minmax(0, 1fr); }
+  .idcard { width: min(100%, 340px); }  .rabbit { grid-template-columns: minmax(0, 1fr); }
   .pub { flex-basis: 84%; }
   .links { grid-template-columns: minmax(0, 1fr); }
   .path { --amp: .45; }
@@ -458,8 +446,6 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .path { --amp: .25; }
   .track { padding-inline: 10px; }
   .tier, .specs > div, .props > div { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .wish { flex-wrap: wrap; }
-  .wish .mono { margin-left: 0; }
   .lk { padding: 14px 16px; }
   .stages { grid-template-columns: minmax(0, 1fr); }
   }
@@ -537,26 +523,6 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
     <header class="board hero" id="hero">
       <div class="stars" aria-hidden="true"></div>
       <div class="nebula" aria-hidden="true"></div>
-      <pre class="tty" aria-hidden="true">boot: loading kernel modules ................. ok
-scan: enumerating devices [0x00 .. 0x1f]
-dev0: nvme0n1   256G  luks   mounted /
-dev1: nvme1n1   1T    ntfs   mounted /mnt/win
-vm00: kali      state=running  mem=4096M
-vm01: ubuntu    state=running  mem=4096M
-vm02: freebsd   state=halted   mem=2048M
-net0: link up   1000Mb/s  full duplex
-warn: operator present. proceed with caution.
-auth: identity = derrick.j.last.jr
-auth: role = student / hobbyist / musician
-exec: /usr/local/bin/portfolio --public
-note: most attacks still start with a person
-sig:  ░▒▓█▓▒░ unknown source ░▒▓█▓▒░
-entity: ???  state=observing
-scan: enumerating devices [0x00 .. 0x1f]
-dev0: nvme0n1   256G  luks   mounted /
-vm00: kali      state=running  mem=4096M
-net0: link up   1000Mb/s  full duplex
-exec: /usr/local/bin/portfolio --public</pre>
       <div>
         <h1 class="name" aria-label="Derrick J. Last Jr"><span aria-hidden="true">Derrick</span><span class="rest" aria-hidden="true">J. Last Jr</span></h1>
         <p class="lede">Psychology B.S. student and hobbyist hacker who reads markets and makes music.</p>
@@ -636,15 +602,12 @@ exec: /usr/local/bin/portfolio --public</pre>
       <div class="card panel spot" role="tabpanel" id="p-music" aria-labelledby="t-music" style="--c: var(--pink)" hidden>
         <div>
           <h3 class="p-title">Music</h3>
-          <p class="p-lead">My art of choice.</p>
         </div>
         <div>
           <span class="mono">Topics</span>
           <div class="chips"><span class="chip">Producing</span><span class="chip">Engineering</span><span class="chip">Vocals</span><span class="chip">Songwriting</span><span class="chip">FL Studio</span><span class="chip">BandLab</span></div>
           <div class="proofs">
             <a class="proof" href="https://soundcloud.com/just-games-359581971" target="_blank" rel="noopener noreferrer"><span><b>SoundCloud</b><small>What I’ve released</small></span><svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></a>
-            <div class="proof"><span><b>FL Studio</b><small>Beat production</small></span></div>
-            <div class="proof"><span><b>BandLab</b><small>Vocal engineering and recording</small></span></div>
           </div>
         </div>
         <svg class="wm" aria-hidden="true"><use href="#i-wave"/></svg>
@@ -821,11 +784,6 @@ exec: /usr/local/bin/portfolio --public</pre>
           <div><h3 class="disp">iPhone&nbsp;17</h3><small>Mobile</small></div>
         </article>
       </div>
-      <div class="card wish row rv">
-        <span class="glyph"><svg class="ic" aria-hidden="true"><use href="#i-cpu"/></svg></span>
-        <div><b>Clockwork uConsole</b><span>A pocket cyberdeck, between a phone and a laptop.</span></div>
-        <span class="mono">Considering</span>
-      </div>
 
       <div class="sub" id="workflow">
         <h3>Workflow</h3>
@@ -903,7 +861,6 @@ exec: /usr/local/bin/portfolio --public</pre>
       <div>
         <h2 class="h2" id="hi-h">Hit Me Up</h2>
         <p>Open to technical internships, collaborations, and conversations.</p>
-        <span class="status"><i></i>Looking for a technical internship</span>
       </div>
       <div class="card mail">
         <span class="mono">Email</span>
@@ -914,10 +871,6 @@ exec: /usr/local/bin/portfolio --public</pre>
         <p class="toast" id="toast" aria-live="polite"></p>
       </div>
     </section>
-
-    <footer class="foot">
-      <span>Derrick J. Last Jr · October 2026</span>
-    </footer>
   </main>
 </div>
 
