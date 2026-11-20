@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-TPWVY1I4ntJwFT77/NSdsnIF1ZYTPKywmGR6ZPvXSQ4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/xqqUVCurLFShUSJ/QRuJ6aOxS08y16QXNIEYq1FwD0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Derrick J. Last Jr</title>
@@ -187,8 +187,12 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .idcard .photo { border-radius: 12px; border: 1px solid var(--line-2); box-shadow: 0 30px 56px -26px rgba(0, 0, 0, .7); }
 .idtags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
 .idtags span { padding: 5px 12px; border-radius: 999px; font: 500 .75rem/1.4 var(--f-mono); letter-spacing: .04em; color: var(--soft); background: rgba(255, 255, 255, .035); border: 1px solid var(--line-2); white-space: nowrap; }
-.photo { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 10px; background: var(--well); }
-.photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: hue-rotate(28deg) saturate(1.14) contrast(1.08); }
+.photo { position: relative; display: block; width: 100%; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 10px; background: var(--well); padding: 0; margin: 0; border: 0; font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: var(--pf, hue-rotate(28deg) saturate(1.14) contrast(1.08)); }
+.photo:focus-visible { outline-offset: -3px; border-radius: 10px; }
+.idphoto-dots { justify-content: flex-start; margin-top: 10px; }
+.photo::after { content: ""; position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: soft-light; transition: opacity .35s ease;
+  background-image: radial-gradient(circle, color-mix(in oklab, var(--fg) 85%, transparent) 1px, transparent 1.3px); background-size: 6px 6px; }
 @media (prefers-reduced-motion: no-preference) {
   .hero > .nebula { animation: drift 32s ease-in-out infinite alternate; }
   .hero > .stars::after { animation: twinkle 7s ease-in-out infinite alternate; }
@@ -383,6 +387,11 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .addr { padding: 13px 14px; border-radius: 10px; background: var(--well); border: 1px solid var(--line-2); font: 400 clamp(.78rem, 3.3vw, .9375rem) var(--f-mono); user-select: all; overflow-wrap: anywhere; }
 .mail .row { flex-wrap: wrap; }
 .toast { min-height: 1.4em; margin: 0; font: 400 .8125rem var(--f-mono); color: var(--cyan); }
+.snapswrap { display: flex; flex-direction: column; gap: 10px; padding-top: 6px; border-top: 1px solid var(--line-2); }
+.snaps { display: flex; gap: 8px; }
+.snaps a { display: block; width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line-2); background: var(--well); flex: none; }
+.snaps img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; filter: grayscale(.55) brightness(.82) contrast(1.05); transition: filter .25s ease; }
+.snaps a:hover img { filter: grayscale(.25) brightness(.92) contrast(1.05); }
 
 /* life: quiet scroll reveal, cursor spotlight, small pops. Transform and opacity only. */
 .spot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s ease;
@@ -409,6 +418,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .btn:active, .btn:hover:active { transform: scale(.97); }
   .lift:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -18px rgba(0, 0, 0, .65); }
   .spot:hover::after { opacity: 1; }
+  .photo:hover::after { opacity: .4; }
   .btn.ghost:hover { background: #2d283a; border-color: var(--line-3); }
   .cta .btn:hover { transform: translateY(-2px); }
   .cta .btn.ghost:hover { background: rgba(79, 213, 222, .18); border-color: var(--cyan-hi); }
@@ -534,11 +544,14 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
         </div>
       </div>
       <figure class="idcard">
-        <picture class="photo">
-          <source srcset="derrick.webp" type="image/webp">
-          <img src="derrick.jpg" alt="Me in my room, lit by LED strips, in front of a tapestry" width="720" height="900" fetchpriority="high">
-        </picture>
+        <button class="photo" type="button" id="idphoto" aria-label="Show another photo of me">
+          <picture>
+            <source id="idphoto-src" srcset="derrick.webp" type="image/webp">
+            <img id="idphoto-img" src="derrick.jpg" alt="Me in my room, lit by LED strips, in front of a tapestry" width="720" height="900" fetchpriority="high">
+          </picture>
+        </button>
         <figcaption class="idtags"><span>Boston, MA</span><span>Born 2006</span></figcaption>
+        <div class="dots idphoto-dots" id="id-dots" role="group" aria-label="Choose a photo"></div>
       </figure>
     </header>
 
@@ -868,6 +881,13 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
           <button class="btn" type="button" id="copy"><svg class="ic sm" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy email</span></button>
         </div>
         <p class="toast" id="toast" aria-live="polite"></p>
+        <div class="snapswrap">
+          <span class="mono">Elsewhere</span>
+          <div class="snaps">
+            <a href="https://instagram.com/derrick.711" target="_blank" rel="noopener noreferrer" aria-label="More on Instagram"><img src="snap-1.jpg" alt="" loading="lazy" decoding="async"></a>
+            <a href="https://instagram.com/derrick.711" target="_blank" rel="noopener noreferrer" aria-label="More on Instagram"><img src="snap-2.jpg" alt="" loading="lazy" decoding="async"></a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -1020,6 +1040,36 @@ if (window.top !== window.self) { document.documentElement.textContent = ""; thr
     var paint = onFrame(function () { if (!spotEl) return; var r = spotEl.getBoundingClientRect(); spotEl.style.setProperty("--mx", sx - r.left + "px"); spotEl.style.setProperty("--my", sy - r.top + "px"); });
     document.addEventListener("pointermove", function (e) { spotEl = e.target.closest ? e.target.closest(".spot") : null; sx = e.clientX; sy = e.clientY; if (spotEl) paint(); }, { passive: true });
   }
+
+  /* Hero photo: click to cycle, no auto-advance */
+  (function () {
+    var btn = $("#idphoto"), img = $("#idphoto-img"), source = $("#idphoto-src"), dotsWrap = $("#id-dots");
+    var slides = [
+      { webp: "derrick.webp", src: "derrick.jpg", alt: "Me in my room, lit by LED strips, in front of a tapestry", filter: "hue-rotate(28deg) saturate(1.14) contrast(1.08)" },
+      { src: "snap-1.jpg", alt: "Me under green light in a skeleton tee and beret", filter: "saturate(1.05) contrast(1.05)" },
+      { src: "snap-2.jpg", alt: "Me in a varsity jacket", filter: "brightness(1.1) saturate(1.05) contrast(1.08)" }
+    ];
+    var idx = 0;
+    var dots = slides.map(function (_, i) {
+      var d = document.createElement("button");
+      d.type = "button"; d.className = "dot";
+      d.setAttribute("aria-label", "Photo " + (i + 1) + " of " + slides.length);
+      d.addEventListener("click", function (e) { e.stopPropagation(); show(i); });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    function show(i) {
+      idx = i;
+      var s = slides[i];
+      if (s.webp) { source.setAttribute("srcset", s.webp); source.setAttribute("type", "image/webp"); }
+      else { source.removeAttribute("srcset"); source.removeAttribute("type"); }
+      img.src = s.src; img.alt = s.alt;
+      img.style.setProperty("--pf", s.filter);
+      dots.forEach(function (d, j) { d.setAttribute("aria-current", j === i); });
+    }
+    btn.addEventListener("click", function () { show((idx + 1) % slides.length); });
+    dots[0].setAttribute("aria-current", "true");
+  })();
 
   /* Copy email */
   (function () {
