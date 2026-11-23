@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/xqqUVCurLFShUSJ/QRuJ6aOxS08y16QXNIEYq1FwD0='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-rCx70u4c7sEazyMjTAVlRIGzOesuDwpf8vz/bFbvknE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Derrick J. Last Jr</title>
@@ -958,26 +958,41 @@ if (window.top !== window.self) { document.documentElement.textContent = ""; thr
   (function () {
     var track = $("#w-track"), prev = $("#w-prev"), next = $("#w-next"), dotsWrap = $("#w-dots");
     var slides = $$(".pub", track);
-    var dots = slides.map(function (s, i) {
-      s.setAttribute("aria-label", (i + 1) + " of " + slides.length + ": " + $("h3", s).textContent);
-      var d = document.createElement("button");
-      d.type = "button"; d.className = "dot";
-      d.setAttribute("aria-label", "Go to post " + (i + 1));
-      d.addEventListener("click", function () { go(s.offsetLeft - slides[0].offsetLeft); });
-      dotsWrap.appendChild(d);
-      return d;
-    });
-    function step() { return slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth; }
+    slides.forEach(function (s, i) { s.setAttribute("aria-label", (i + 1) + " of " + slides.length + ": " + $("h3", s).textContent); });
+    var stops = [], dots = [];
     function go(x) { track.scrollTo({ left: x, behavior: reduce ? "auto" : "smooth" }); }
-    function update() {
-      var end = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-      var idx = end ? slides.length - 1 : Math.round(track.scrollLeft / step());
-      dots.forEach(function (d, i) { d.setAttribute("aria-current", i === idx); });
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = end;
+    function build() {
+      var max = track.scrollWidth - track.clientWidth, base = slides[0].offsetLeft, seen = {};
+      stops = [];
+      slides.forEach(function (s) {
+        var x = Math.min(s.offsetLeft - base, max);
+        if (!seen[x]) { seen[x] = 1; stops.push(x); }
+      });
+      if (dots.length === stops.length) return;
+      dotsWrap.textContent = "";
+      dots = stops.map(function (x, i) {
+        var d = document.createElement("button");
+        d.type = "button"; d.className = "dot";
+        d.setAttribute("aria-label", "Go to posts page " + (i + 1));
+        d.addEventListener("click", function () { go(stops[i]); });
+        dotsWrap.appendChild(d);
+        return d;
+      });
     }
-    prev.addEventListener("click", function () { go(track.scrollLeft - step()); });
-    next.addEventListener("click", function () { go(track.scrollLeft + step()); });
+    function current() {
+      var cur = 0, best = Infinity;
+      stops.forEach(function (x, i) { var d = Math.abs(track.scrollLeft - x); if (d < best) { best = d; cur = i; } });
+      return cur;
+    }
+    function update() {
+      build();
+      var idx = current();
+      dots.forEach(function (d, i) { d.setAttribute("aria-current", i === idx); });
+      prev.disabled = idx === 0;
+      next.disabled = idx === stops.length - 1;
+    }
+    prev.addEventListener("click", function () { go(stops[Math.max(0, current() - 1)]); });
+    next.addEventListener("click", function () { go(stops[Math.min(stops.length - 1, current() + 1)]); });
     track.addEventListener("scroll", onFrame(update), { passive: true });
     addEventListener("resize", onFrame(update));
     update();
