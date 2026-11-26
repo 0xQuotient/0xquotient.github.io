@@ -462,7 +462,7 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .pcover.algo { background-image: url(art/algo.png); }
 .pcover::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
   background: inherit; mix-blend-mode: screen; filter: hue-rotate(150deg) saturate(1.6); }
-body::after { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .025;
+body::after { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .02;
   background: radial-gradient(circle, #fff .6px, transparent .9px) 0 0 / 4px 4px; }
 @media (prefers-reduced-motion: no-preference) {
   .pub:hover .pcover::after { animation: mosh .55s steps(1) 1; }
@@ -488,7 +488,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-eve
     linear-gradient(var(--k), var(--k)) 100% 100% / 14px 1px, linear-gradient(var(--k), var(--k)) 100% 100% / 1px 14px;
   background-repeat: no-repeat; }
 .hero > .stars::before { content: ""; position: absolute; left: 0; bottom: 0; width: min(720px, 62%); aspect-ratio: 4 / 1;
-  background: url(art/hero.png) left bottom / 100% auto no-repeat; image-rendering: pixelated; opacity: .22; }
+  background: url(art/hero.png) left bottom / 100% auto no-repeat; image-rendering: pixelated; opacity: .34; }
 .hi { background-image: url(art/hero-t.png), radial-gradient(60% 90% at 0 0, rgba(79, 213, 222, .08), transparent 60%), radial-gradient(50% 80% at 100% 100%, rgba(224, 92, 158, .08), transparent 60%);
   background-position: left top, 0 0, 0 0; background-size: min(720px, 62%) auto, auto, auto; background-repeat: no-repeat; image-rendering: pixelated; }
 @media (max-width: 760px) { .bg { background-size: 0 0, 0 0, auto, auto, auto; } }
