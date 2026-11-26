@@ -283,10 +283,6 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
 .pub { flex: 0 0 calc((100% - 32px) / 2.4); display: flex; flex-direction: column; overflow: hidden; scroll-snap-align: start; transition: border-color .15s ease; }
 .pcover { position: relative; display: flex; align-items: flex-end; justify-content: flex-end; gap: 8px; height: 112px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
 .pcover span { position: relative; z-index: 2; padding: 3px 8px; border-radius: 6px; background: rgba(8, 7, 12, .72); color: var(--soft); }
-.pcover.osa { background: radial-gradient(circle at 85% 15%, rgba(188, 161, 237, .45), transparent 40%), linear-gradient(rgba(188, 161, 237, .13) 1px, transparent 1px) 0 0 / 26px 26px, linear-gradient(90deg, rgba(188, 161, 237, .13) 1px, transparent 1px) 0 0 / 26px 26px, #1d172b; }
-.pcover.hnode { background: radial-gradient(circle at 20% 30%, rgba(224, 92, 158, .42), transparent 40%), radial-gradient(circle, rgba(224, 92, 158, .36) 1.4px, transparent 2px) 0 0 / 20px 20px, #221523; }
-.pcover.sacred { background: radial-gradient(circle at 80% 20%, rgba(146, 163, 234, .45), transparent 40%), repeating-conic-gradient(from 0deg at 80% 20%, rgba(146, 163, 234, .13) 0 5deg, transparent 5deg 15deg), #1a1c33; }
-.pcover.hh { background: radial-gradient(circle at 85% 25%, rgba(79, 213, 222, .4), transparent 34%), repeating-radial-gradient(circle at 85% 25%, rgba(79, 213, 222, .12) 0 1px, transparent 1px 18px), #16212c; }
 .pbody { display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 18px 20px 20px; }
 .pbody h3 { margin: 0; font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.15; }
 .pbody p { margin: 0; color: var(--soft); font-size: .9375rem; }
@@ -457,6 +453,30 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
   .lk { padding: 14px 16px; }
   .stages { grid-template-columns: minmax(0, 1fr); }
   }
+/* 2077 layer: generated 1-bit glyph art on covers, rare RGB-split bursts. Text stays clean. */
+.pcover { background: #0b0912 url(art/osa.png) right center / auto 100% no-repeat; image-rendering: pixelated; }
+.pcover.osa { background-image: url(art/osa.png); } .pcover.hnode { background-image: url(art/hnode.png); }
+.pcover.sacred { background-image: url(art/sacred.png); } .pcover.hh { background-image: url(art/hh.png); }
+.pcover.ths { background-image: url(art/ths.png); } .pcover.itot { background-image: url(art/itot.png); }
+.pcover.aod { background-image: url(art/aod.png); } .pcover.pic { background-image: url(art/pic.png); }
+.pcover.algo { background-image: url(art/algo.png); }
+.pcover::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: inherit; mix-blend-mode: screen; filter: hue-rotate(150deg) saturate(1.6); }
+.hero::before { content: ""; position: absolute; left: 0; bottom: 0; width: min(720px, 62%); aspect-ratio: 4 / 1; z-index: 0; pointer-events: none;
+  background: url(art/hero.png) left bottom / 100% auto no-repeat; image-rendering: pixelated; opacity: .32; border-bottom-left-radius: inherit; }
+body::after { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .04;
+  background: radial-gradient(circle, #fff .6px, transparent .9px) 0 0 / 4px 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .pub:hover .pcover::after { animation: mosh .55s steps(1) 1; }
+  @keyframes mosh { 0% { opacity: .9; transform: translateX(-5px); clip-path: inset(20% 0 45% 0); }
+    25% { opacity: .9; transform: translateX(7px); clip-path: inset(60% 0 10% 0); }
+    50% { opacity: .7; transform: translateX(-3px); clip-path: inset(5% 0 80% 0); } 75%, 100% { opacity: 0; transform: none; clip-path: none; } }
+  .name span:first-child { animation: gburst 10s steps(1) 2.5s infinite; }
+  @keyframes gburst { 0%, 95%, 100% { text-shadow: none; transform: none; }
+    96% { text-shadow: -3px 0 var(--pink), 3px 0 var(--cyan); transform: translateX(2px); }
+    97% { text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan); transform: translateX(-2px); }
+    98% { text-shadow: none; transform: none; } }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
@@ -734,23 +754,23 @@ main { max-width: 1200px; margin-inline: auto; padding: 22px clamp(16px, 3vw, 36
           <span class="pbody"><h3 class="disp">Hellhound</h3><p>How my tool scores manipulation, and what it can’t see.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
         <a class="card pub lift spot" href="https://paragraph.com/@derrickjr/technical-hacking-is-social" target="_blank" rel="noopener noreferrer">
-          <span class="pcover osa mono"><span>Security</span></span>
+          <span class="pcover ths mono"><span>Security</span></span>
           <span class="pbody"><h3 class="disp">Technical Hacking is Social</h3><p>Psychology isn’t an add-on to security. It’s built into nearly every attack and defense, from payload delivery to the people running the systems.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
         <a class="card pub lift spot" href="https://paragraph.com/@derrickjr/itot-classificatory-critiques" target="_blank" rel="noopener noreferrer">
-          <span class="pcover hh mono"><span>Tech</span></span>
+          <span class="pcover itot mono"><span>Tech</span></span>
           <span class="pbody"><h3 class="disp">IT/OT Classificatory Critiques</h3><p>Connected devices are blurring the line between IT and OT, so the models we use to classify them need to be retested.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
         <a class="card pub lift spot" href="https://paragraph.com/@derrickjr/the-art-of-deception" target="_blank" rel="noopener noreferrer">
-          <span class="pcover hnode mono"><span>Psychology × Security</span></span>
+          <span class="pcover aod mono"><span>Psychology × Security</span></span>
           <span class="pbody"><h3 class="disp">The Art of Deception</h3><p>A $243M crypto heist that took no code, only psychology.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
         <a class="card pub lift spot" href="https://paragraph.com/@derrickjr/psychology-in-cybersecurity" target="_blank" rel="noopener noreferrer">
-          <span class="pcover sacred mono"><span>Psychology × Security</span></span>
+          <span class="pcover pic mono"><span>Psychology × Security</span></span>
           <span class="pbody"><h3 class="disp">Psychology in Cybersecurity</h3><p>Defenders have cognitive biases too, from guards to SOC analysts, and attackers exploit them. Cyber is just the medium.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
         <a class="card pub lift spot" href="https://paragraph.com/@derrickjr/algorithmic-programming" target="_blank" rel="noopener noreferrer">
-          <span class="pcover hnode mono"><span>Psychology</span></span>
+          <span class="pcover algo mono"><span>Psychology</span></span>
           <span class="pbody"><h3 class="disp">Algorithmic Programming</h3><p>How media algorithms program the mind through a feedback loop between what we consume and what we become.</p><span class="read">Read <svg class="ic sm" aria-hidden="true"><use href="#i-out"/></svg></span></span>
         </a>
       </div>
